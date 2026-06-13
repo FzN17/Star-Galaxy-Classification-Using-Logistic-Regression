@@ -16,15 +16,16 @@ The dataset provides four features for 2,000 unique observations: `u_g`, `g_r`, 
 
 # Pillar 3: Effective Problem Solving (Technical Workflow)
 An effective problem-solving strategy translates domain hypotheses into an elegant, reliable, and rigorously validated machine learning architecture.
-+---------------------------+       +----------------------------+       +-----------------------------+
-|   Data Inspection &       |       |  Data Partitioning         |       |   Baseline Modeling         |
-|   Feature Engineering     | ----> |  - 70% Train Set           | ----> |   - Logistic Regression     |
-|   - 2,000 SDSS Objects    |       |  - 30% Test Set            |       |   - High Interpretability   |
-+---------------------------+       +----------------------------+       +-----------------------------+
-                                                                                        |
-                                                                                        v
-+---------------------------+       +----------------------------+       +-----------------------------+
-|   Feature Importance      |       |  Multi-Metric Evaluation   |       |   Generalization Check      |
-|   - Coefficient Analysis  | <---- |  - Precision/Recall (97%)  | <---- |   - 5-Fold Cross Validation |
-|   - Sign/Magnitude Check  |       |  - ROC-AUC Curve (0.996)   |       |   - Stable Std Dev (0.017)  |
-+---------------------------+       +----------------------------+       +-----------------------------+
+The implemented pipeline systematically executes this solution:
+1. **Data Stratification & Splitting**: The 2,000 records are partitioned into a 70% training set (1,400 samples) and a 30% validation set (600 samples). This ensures that validation performance remains an unbiased estimator of true generalization.
+2. **Algorithm Selection**: A Logistic Regression model is selected. While non-linear architectures (like Random Forests or Neural Networks) are powerful, starting with a generalized linear model helps test if the feature space is linearly separable, providing clean, mathematically derivable feature importances.
+3. **Robust Validation Guardrails**: Rather than trusting a single train-test split, a 5-fold Cross-Validation (CV) routine is integrated. This iteratively evaluates the model on unseen subsets of the training data to confirm that the performance is not an artifact of data sorting.
+4. **Multi-Dimensional Evaluation**: The model is evaluated beyond simple accuracy by utilizing a Confusion Matrix, a detailed Classification Report (Tracking Precision, Recall, and F1​-score for both classes), and a Receiver Operating Characteristic (ROC) curve to isolate the Area Under the Curve (AUC).
+
+# Pillar 4: Good Logical Explanation (Synthesis & Interpretation)
+The final stage bridges the gap between machine learning metrics and scientific reality, explaining why the model behaves the way it does and validating its logic against physical laws.
+The evaluation yields the following results:
+- Training Accuracy: 0.964 (96.4%)
+- Test Accuracy: 0.972 (97.2%)
+- 5-Fold CV Accuracy: 0.964±0.017
+- ROC-AUC Score: 0.996
